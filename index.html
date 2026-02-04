@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microsoft's Keyboard Hell</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; }
+    .hero-bg { background-image: url('https://images.pexels.com/photos/7047620/pexels-photo-7047620.jpeg'); background-size: cover; background-position: center; }
+    .story-card { transition: all 0.3s; }
+    .story-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3); }
+  </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200">
+
+  <!-- HERO -->
+  <div class="hero-bg h-screen flex items-center justify-center relative">
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative text-center max-w-4xl px-6">
+      <h1 class="text-6xl md:text-7xl font-bold text-red-600 mb-4 tracking-tighter">MICROSOFT'S KEYBOARD HELL</h1>
+      <p class="text-3xl md:text-4xl font-light">Shared-PC QWERTY pollution that literally injures people</p>
+      <p class="mt-8 text-xl text-zinc-400">A decade-old bug. Still broken in 2026. Still ruining lives.</p>
+      <div class="mt-12 flex gap-6 justify-center">
+        <a href="#submit" class="bg-red-600 hover:bg-red-700 px-8 py-4 rounded-full text-xl font-medium">Add your story</a>
+        <a href="#wall" class="border border-red-600 hover:bg-red-950 px-8 py-4 rounded-full text-xl font-medium">See the rage</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOUR STORY -->
+  <section class="py-20 bg-zinc-900">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-red-500 mb-8">My story (and why I’m done)</h2>
+      <div class="prose prose-invert prose-lg">
+        <p>I am the furious admin on a shared office computer. Another employee uses normal QWERTY. Every month Chrome and Thunderbird magically switch to QWERTY. Nothing fixes it permanently.</p>
+        <p class="font-bold text-red-400">I have damaged both my hands smashing the keyboard in frustration. I have made my wife cry from the stress. That is inexcusable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WALL OF PAIN (auto-populated) -->
+  <section id="wall" class="py-20 bg-black">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-4 text-red-500">Wall of Pain</h2>
+      <p class="text-center text-zinc-500 mb-12">Real stories from real victims. Updated automatically.</p>
+      
+      <div id="stories" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <!-- JS will fill this -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBMIT FORM -->
+  <section id="submit" class="py-20 bg-zinc-900">
+    <div class="max-w-2xl mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-4">Add Your Rage</h2>
+      <p class="text-center text-zinc-400 mb-12">Anonymous. Microsoft will feel this eventually.</p>
+
+      <form id="rageForm" action="https://docs.google.com/forms/d/e/1FAIpQLS...YOUR_FORM_ID_HERE.../formResponse" 
+            method="POST" target="hidden_iframe" class="bg-zinc-950 p-10 rounded-3xl border border-zinc-800">
+        
+        <input type="hidden" name="entry.1279682513" id="appsField">
+        <input type="hidden" name="entry.1216971845" id="freqField">
+        <input type="hidden" name="entry.223691704" id="storyField">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium mb-2">Apps affected</label>
+            <input type="text" id="apps" placeholder="Chrome, Thunderbird, VS Code..." 
+                   class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-6 py-4 focus:outline-none focus:border-red-600">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">How often?</label>
+            <input type="text" id="freq" placeholder="Every login / monthly / after updates"
+                   class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-6 py-4 focus:outline-none focus:border-red-600">
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <label class="block text-sm font-medium mb-2">Your story (be as angry as you want)</label>
+          <textarea id="story" rows="6" required
+                    class="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-red-600"
+                    placeholder="It broke my hands. It made my wife cry..."></textarea>
+        </div>
+
+        <button type="submit" class="mt-10 w-full bg-red-600 hover:bg-red-700 transition py-6 rounded-2xl text-xl font-semibold">
+          SEND TO THE COLLECTIVE RAGE
+        </button>
+      </form>
+
+      <!-- Hidden iframe for no-redirect submission -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){showSuccess()}"></iframe>
+    </div>
+  </section>
+
+  <footer class="py-12 bg-zinc-950 border-t border-zinc-800 text-center text-zinc-500 text-sm">
+    Fuck Microshaft. May their layout cache burn in hell.<br>
+    Built in pure spite • 2026
+  </footer>
+
+  <script>
+    let submitted = false;
+
+    function showSuccess() {
+      const msg = document.createElement('div');
+      msg.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-green-600 text-white px-8 py-4 rounded-2xl shadow-2xl text-lg font-medium';
+      msg.textContent = 'Story received. The wall grows. Thank you.';
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 4000);
+      submitted = false;
+      // Optional: reload wall after submit
+      setTimeout(loadStories, 2000);
+    }
+
+    // === REPLACE THESE TWO LINES ===
+    const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSeyndZvUxAz8nJzhdVV4VDDgb_zRNnzrz3GCzS-5b35ZeVQLQ/formResponse";
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTTvI32Wa1eb3gPqjshLlu0ew90yMjsAvvqBtm8njLfyXK2qZOe37OzWmwPLTvLN3vtW7QpbVwp9_Cu/pub?gid=26429487&single=true&output=csv";
+    // =================================
+
+    document.getElementById('rageForm').action = FORM_ACTION;
+
+    function loadStories() {
+      fetch(CSV_URL)
+        .then(r => r.text())
+        .then(csv => {
+          Papa.parse(csv, {
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+              const container = document.getElementById('stories');
+              container.innerHTML = '';
+
+              // Reverse so newest first
+              results.data.reverse().forEach(row => {
+                if (!row['Your story / rage']) return; // skip empty
+
+                const card = document.createElement('div');
+                card.className = 'story-card bg-zinc-900 p-8 rounded-2xl border border-red-900';
+                card.innerHTML = `
+                  <p class="italic text-lg">"${row['Your story / rage'].replace(/"/g, '&quot;')}"</p>
+                  <div class="mt-6 text-sm text-zinc-400">
+                    ${row['Apps affected'] ? `<span class="font-medium">Apps:</span> ${row['Apps affected']}<br>` : ''}
+                    ${row['How often does this happen?'] ? `<span class="font-medium">Frequency:</span> ${row['How often does this happen?']}<br>` : ''}
+                    <span class="font-medium">Posted:</span> ${row['Timestamp'] || 'recently'}
+                  </div>
+                `;
+                container.appendChild(card);
+              });
+
+              if (results.data.length === 0) {
+                container.innerHTML = `<p class="col-span-full text-center text-zinc-500 py-12">No stories yet. Be the first.</p>`;
+              }
+            }
+          });
+        });
+    }
+
+    // Load stories on page open
+    window.onload = loadStories;
+
+    // Form submit handler
+    document.getElementById('rageForm').addEventListener('submit', () => {
+      submitted = true;
+      // Copy visible fields to hidden Google fields
+      document.getElementById('appsField').value = document.getElementById('apps').value;
+      document.getElementById('freqField').value = document.getElementById('freq').value;
+      document.getElementById('storyField').value = document.getElementById('story').value;
+    });
+  </script>
+</body>
+</html>
