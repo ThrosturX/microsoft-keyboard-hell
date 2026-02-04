@@ -1,70 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Microsoft Keyboard Hell</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microsoft's Keyboard Hell</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
 <body>
 
-    <header class="hero">
-        <div class="container">
-            <h1 class="glitch-text" data-text="MICROSOFT KEYBOARD HELL">MICROSOFT KEYBOARD HELL</h1>
-            <p class="lead">We tried the registry hacks. We disabled selective suspend. We bought new dongles. <br><strong>It still didn't work.</strong></p>
-            <a href="https://github.com/throsturx/microsoft-keyboard-hell" class="btn-primary">Add Your Story to the Repo</a>
+  <!-- HERO -->
+  <div class="hero-bg min-h-screen flex items-center relative">
+    <div class="scanline"></div>
+    <div class="relative z-10 text-center max-w-5xl mx-auto px-6">
+      <div class="mb-6 inline-block bg-red-600/10 border border-red-600 px-8 py-2 rounded-full text-red-400 text-sm tracking-[4px]">EST. 2010 • STILL BROKEN 2026</div>
+      <h1 class="glitch text-7xl md:text-8xl font-black text-red-600">KEYBOARD<br>HELL</h1>
+      <p class="mt-6 text-3xl text-zinc-300 max-w-2xl mx-auto">The decade-old QWERTY infection that damages hands and marriages</p>
+      <div class="mt-16 flex flex-wrap gap-6 justify-center">
+        <a href="#wall" class="btn-primary">SEE THE RAGE</a>
+        <a href="#submit" class="btn-secondary">ADD YOUR STORY</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOUR STORY -->
+  <section class="py-24 bg-zinc-900">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-red-500 mb-12 flex items-center gap-6">
+        <span class="text-6xl">☠️</span> MY STORY
+      </h2>
+      <div class="prose prose-invert prose-xl">
+        <p>I’m the admin on a shared office PC. The other user is normal QWERTY. Every month Chrome and Thunderbird magically become QWERTY. Nothing fixes it forever.</p>
+        <p class="font-bold text-red-400 text-3xl mt-12">I damaged both my hands smashing the keyboard.<br>I made my wife cry from the stress.<br>That is FUCKING UNACCEPTABLE.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WALL -->
+  <section id="wall" class="py-20 bg-black">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex justify-between items-baseline mb-12">
+        <h2 class="text-6xl font-bold text-red-600">WALL OF PAIN</h2>
+        <div id="rageCount" class="text-4xl font-mono text-zinc-500">0 stories</div>
+      </div>
+      <div id="stories" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+    </div>
+  </section>
+
+  <!-- SUBMIT -->
+  <section id="submit" class="py-24 bg-zinc-900">
+    <div class="max-w-2xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-red-600 text-center mb-4">UNLEASH YOUR RAGE</h2>
+      <p class="text-center text-zinc-400 mb-12">Anonymous. Every story hurts Microsoft a little more.</p>
+
+      <form id="rageForm" method="POST" target="hidden_iframe" class="form-container">
+        <input type="hidden" name="entry.1279682513" id="appsField">
+        <input type="hidden" name="entry.1216971845" id="freqField">
+        <input type="hidden" name="entry.223691704" id="storyField">
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <label>Apps affected</label>
+            <input type="text" id="apps" placeholder="Chrome, Thunderbird...">
+          </div>
+          <div>
+            <label>How often?</label>
+            <input type="text" id="freq" placeholder="Every login / monthly...">
+          </div>
         </div>
-    </header>
 
-    <main class="container">
-        
-        <section class="manifesto">
-            <h2>The Manifesto</h2>
-            <p>This is not a support forum. This is a graveyard. If you are here, you have likely spent 4 hours reading ten-year-old threads about "USB Polling Rates" only to realize the hardware is just fundamentally broken.</p>
-            <p>Below are the stories of those who fought the hardware, and lost.</p>
-        </section>
-
-        <div class="timeline">
-            <article class="rant-card">
-                <div class="rant-header">
-                    <span class="author">@ThrosturX</span>
-                    <span class="date">Day 0</span>
-                </div>
-                <div class="rant-content">
-                    <h3>The Sculpt Ergonomic Incident</h3>
-                    <p>It started with a missed keystroke. Then a lag spike. I thought it was interference from my router. I moved the router. I bought a USB extension cable. I wrapped the dongle in tinfoil like a lunatic. The keyboard laughed at me. It disconnected right in the middle of a `git push`.</p>
-                </div>
-            </article>
-
-            <article class="rant-card">
-                <div class="rant-header">
-                    <span class="author">@AnotherVictim</span>
-                    <span class="date">Day 42</span>
-                </div>
-                <div class="rant-content">
-                    <h3>Surface Keyboard Lag</h3>
-                    <p>Why does a $100 keyboard have worse connectivity than a $5 garage sale find? I reinstalled Windows for this. I literally reinstalled my operating system because I thought it was a driver issue. It wasn't.</p>
-                </div>
-            </article>
-
-            <article class="rant-card">
-                <div class="rant-header">
-                    <span class="author">@LegacyUser</span>
-                    <span class="date">Day 105</span>
-                </div>
-                <div class="rant-content">
-                    <h3>The Dongle Died</h3>
-                    <p>They told me the dongle is encrypted to the specific serial number of the mouse and keyboard. So when the dongle died, the entire set became e-waste. This should be illegal.</p>
-                </div>
-            </article>
-
+        <div>
+          <label>Your story (be vicious)</label>
+          <textarea id="story" rows="6" required placeholder="It broke my hands..."></textarea>
         </div>
-    </main>
 
-    <footer>
-        <p>Managed by <a href="https://github.com/throsturx">ThrosturX</a>. Submit a PR to vent.</p>
-    </footer>
+        <button type="submit" class="submit-btn">SEND TO THE COLLECTIVE RAGE 🔥</button>
+      </form>
+    </div>
+  </section>
 
+  <footer class="py-16 text-center text-zinc-500 text-sm bg-black">
+    Fuck Microshaft • Built in pure spite • 2026
+  </footer>
+
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+  <script>
+    // === PUT YOUR REAL URLS HERE ===
+    const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSeyndZvUxAz8nJzhdVV4VDDgb_zRNnzrz3GCzS-5b35ZeVQLQ/formResponse";
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTTvI32Wa1eb3gPqjshLlu0ew90yMjsAvvqBtm8njLfyXK2qZOe37OzWmwPLTvLN3vtW7QpbVwp9_Cu/pub?gid=26429487&single=true&output=csv";
+    // ================================
+
+    document.getElementById('rageForm').action = FORM_ACTION;
+
+    function loadStories() {
+      fetch(CSV_URL).then(r => r.text()).then(csv => {
+        Papa.parse(csv, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (results) => {
+            const data = results.data.reverse();
+            document.getElementById('rageCount').textContent = `${data.length} stories of pure rage`;
+            const container = document.getElementById('stories');
+            container.innerHTML = '';
+            data.forEach(row => {
+              if (!row['Your story / rage']) return;
+              const card = document.createElement('div');
+              card.className = 'story-card';
+              card.innerHTML = `
+                <p class="quote">"${row['Your story / rage']}"</p>
+                <div class="meta">
+                  ${row['Apps affected'] ? `<span>Apps: ${row['Apps affected']}</span>` : ''}
+                  ${row['How often does this happen?'] ? `<span>Frequency: ${row['How often does this happen?']}</span>` : ''}
+                </div>
+              `;
+              container.appendChild(card);
+            });
+          }
+        });
+      });
+    }
+
+    document.getElementById('rageForm').addEventListener('submit', () => {
+      document.getElementById('appsField').value = document.getElementById('apps').value;
+      document.getElementById('freqField').value = document.getElementById('freq').value;
+      document.getElementById('storyField').value = document.getElementById('story').value;
+      setTimeout(loadStories, 2000);
+    });
+
+    window.onload = loadStories;
+    setInterval(loadStories, 60000);
+  </script>
 </body>
 </html>
